@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div style="width:50% ; margin : auto">
+    <table class="table table-bordered border-primary">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Musician Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Album Rating</th>
+            <th scope="col">Instrument Type</th>
+            <th scope="col">Album Name</th>
+            <th scope="col">Release Date</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        {% for profile in data %}
+
+        {% if request.user.is_authenticated %}
+        <tbody>
+          <tr>
+            <th scope="row">{{profile.id}}</th>
+            <td>{{profile.author.first_name}} {{profile.author.last_name}}</td>
+            <td>{{profile.author.email}}</td>
+            <td>{{profile.album_rating}}</td>
+            <td>{{profile.Instrument_type}}</td>
+            <td>{{profile.Album_name}}</td>
+            <td>{{profile.albums_release_date}}</td>
+            <td>
+                <div class="d-flex">
+                    <a href="{% url 'edit' profile.id %}" class="btn btn-warning">Edit</a>
+                    <a href="{% url 'delete' profile.id %}" class="btn btn-danger">Delete</a>
+                </div>
+            </td>
+          </tr>
+        </tbody>
+        
+        {% else %}
+        <tbody>
+          <tr>
+            <th scope="row">{{profile.id}}</th>
+            <td>{{profile.author.first_name}} {{profile.author.last_name}}</td>
+            <td>{{profile.author.email}}</td>
+            <td>{{profile.album_rating}}</td>
+            <td>{{profile.Instrument_type}}</td>
+            <td>{{profile.Album_name}}</td>
+            <td>{{profile.albums_release_date}}</td>
+            
+          </tr>
+        </tbody>
+              
+        {% endif %}
+        
+        
+        {% endfor %}
+      </table>
+</div>
+
+
+{% endblock  %}
